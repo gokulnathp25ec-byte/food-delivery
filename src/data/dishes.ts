@@ -1,6 +1,11 @@
 import { Dish } from '../types';
+import heroSpreadImg from '../assets/images/hero_culinary_spread_1791194497292.jpg';
+import wagyuBurgerImg from '../assets/images/dish_wagyu_burger_1791194515517.jpg';
+import woodfirePizzaImg from '../assets/images/dish_woodfire_pizza_1791194528798.jpg';
+import salmonPokeImg from '../assets/images/dish_salmon_poke_bowl_1791194539714.jpg';
+import matchaTartImg from '../assets/images/dish_matcha_berry_tart_1791194552300.jpg';
 
-export const HERO_IMAGE = '/src/assets/images/hero_culinary_spread_1791194497292.jpg';
+export const HERO_IMAGE = heroSpreadImg;
 
 export const DISHES: Dish[] = [
   {
@@ -19,7 +24,7 @@ export const DISHES: Dish[] = [
     calories: 780,
     rating: 4.94,
     reviewCount: 312,
-    image: '/src/assets/images/dish_wagyu_burger_1791194515517.jpg',
+    image: wagyuBurgerImg,
     chefQuote: 'We sear each patty on a 500-degree plancha to achieve that savory maillard crust while retaining molten marrow juiciness.',
     customizationGroups: [
       {
@@ -74,7 +79,7 @@ export const DISHES: Dish[] = [
     calories: 690,
     rating: 4.96,
     reviewCount: 428,
-    image: '/src/assets/images/dish_woodfire_pizza_1791194528798.jpg',
+    image: woodfirePizzaImg,
     chefQuote: 'The 48-hour cold fermentation breaks down gluten structures for an airy, cloud-like crust with exceptional digestive ease.',
     customizationGroups: [
       {
@@ -117,7 +122,7 @@ export const DISHES: Dish[] = [
     calories: 590,
     rating: 4.92,
     reviewCount: 265,
-    image: '/src/assets/images/dish_salmon_poke_bowl_1791194539714.jpg',
+    image: salmonPokeImg,
     chefQuote: 'Our salmon is caught sustainably and flown in every 36 hours. Cured gently to retain silky sashimi texture.',
     customizationGroups: [
       {
@@ -171,7 +176,7 @@ export const DISHES: Dish[] = [
     calories: 410,
     rating: 4.98,
     reviewCount: 189,
-    image: '/src/assets/images/dish_matcha_berry_tart_1791194552300.jpg',
+    image: matchaTartImg,
     chefQuote: 'We whisk first-harvest Uji matcha into whipped Valrhona white chocolate ganache to balance earthy bitterness with sweet silk.',
     customizationGroups: [
       {
@@ -211,7 +216,7 @@ export const DISHES: Dish[] = [
     calories: 520,
     rating: 4.89,
     reviewCount: 142,
-    image: '/src/assets/images/hero_culinary_spread_1791194497292.jpg',
+    image: heroSpreadImg,
     chefQuote: 'High heat char gives the tender stems a smoky crunch that cuts right through the luscious burrata cream.',
     customizationGroups: [
       {
@@ -243,7 +248,7 @@ export const DISHES: Dish[] = [
     calories: 890,
     rating: 4.93,
     reviewCount: 198,
-    image: '/src/assets/images/dish_wagyu_burger_1791194515517.jpg',
+    image: wagyuBurgerImg,
     chefQuote: 'Aged for 45 days in Himalayan salt-lined chambers to develop deep nutty notes and umami concentration.',
     customizationGroups: [
       {
@@ -285,7 +290,7 @@ export const DISHES: Dish[] = [
     calories: 760,
     rating: 4.95,
     reviewCount: 380,
-    image: '/src/assets/images/dish_woodfire_pizza_1791194528798.jpg',
+    image: woodfirePizzaImg,
     chefQuote: 'The heat of the salami crisps in seconds inside the dome while the honey crystallizes around the edges.',
     customizationGroups: [
       {
@@ -316,7 +321,7 @@ export const DISHES: Dish[] = [
     calories: 490,
     rating: 4.91,
     reviewCount: 154,
-    image: '/src/assets/images/dish_salmon_poke_bowl_1791194539714.jpg',
+    image: salmonPokeImg,
     chefQuote: 'Earthiness from maitake clusters mimics the savory bite of meat with zero compromise.',
     customizationGroups: [
       {
@@ -342,7 +347,7 @@ export const KITCHENS = [
     prepTime: '20–30 min',
     rating: 4.94,
     distance: '1.4 miles',
-    image: '/src/assets/images/dish_wagyu_burger_1791194515517.jpg',
+    image: wagyuBurgerImg,
   },
   {
     id: 'fornacella',
@@ -351,7 +356,7 @@ export const KITCHENS = [
     prepTime: '15–25 min',
     rating: 4.96,
     distance: '0.8 miles',
-    image: '/src/assets/images/dish_woodfire_pizza_1791194528798.jpg',
+    image: woodfirePizzaImg,
   },
   {
     id: 'nami-botanica',
@@ -360,7 +365,7 @@ export const KITCHENS = [
     prepTime: '15–22 min',
     rating: 4.92,
     distance: '2.1 miles',
-    image: '/src/assets/images/dish_salmon_poke_bowl_1791194539714.jpg',
+    image: salmonPokeImg,
   },
   {
     id: 'maison-cacao',
@@ -369,6 +374,6 @@ export const KITCHENS = [
     prepTime: '10–18 min',
     rating: 4.98,
     distance: '1.1 miles',
-    image: '/src/assets/images/dish_matcha_berry_tart_1791194552300.jpg',
+    image: matchaTartImg,
   },
 ];
