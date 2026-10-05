@@ -1,0 +1,6 @@
+{
+  "name": "Nourish & Fork",
+  "description": "Artisan food delivery platform offering chef-curated seasonal dishes, custom orders, and real-time delivery tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
