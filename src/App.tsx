@@ -28,7 +28,7 @@ const CATEGORY_TABS: { id: CuisineCategory; label: string }[] = [
 
 export default function App() {
   // Navigation & Location state
-  const [currentAddress, setCurrentAddress] = useState('742 Evergreen Terrace, Downtown');
+  const [currentAddress, setCurrentAddress] = useState('12/4 Race Course Road, Coimbatore');
 
   // Filter & Search state
   const [searchQuery, setSearchQuery] = useState('');
@@ -52,7 +52,7 @@ export default function App() {
           extras: ['Smoked Berkshire Bacon Slab'],
         },
         specialInstructions: 'Extra crispy fries please!',
-        itemTotal: 22.5,
+        itemTotal: 579,
       },
     ];
   });
@@ -70,7 +70,7 @@ export default function App() {
   // Checkout payload transfer
   const [checkoutPromoTitle, setCheckoutPromoTitle] = useState<string | null>(null);
   const [checkoutPromoDiscount, setCheckoutPromoDiscount] = useState<number>(0);
-  const [checkoutTip, setCheckoutTip] = useState<number>(3.38);
+  const [checkoutTip, setCheckoutTip] = useState<number>(50);
 
   // Filter and sort dishes
   const filteredDishes = useMemo(() => {

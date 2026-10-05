@@ -87,11 +87,11 @@ export const DishCard: React.FC<DishCardProps> = ({
         <div className="pt-4 mt-3 border-t border-[#F5F2EB] flex items-center justify-between gap-3">
           <div className="flex items-baseline gap-2">
             <span className="text-lg font-bold font-mono text-[#1C1917] tabular-nums">
-              ${dish.price.toFixed(2)}
+              ₹{dish.price.toFixed(2)}
             </span>
             {dish.originalPrice && (
               <span className="text-xs font-mono text-[#A8A29E] line-through tabular-nums">
-                ${dish.originalPrice.toFixed(2)}
+                ₹{dish.originalPrice.toFixed(2)}
               </span>
             )}
           </div>

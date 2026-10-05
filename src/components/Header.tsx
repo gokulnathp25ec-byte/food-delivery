@@ -13,10 +13,10 @@ interface HeaderProps {
 }
 
 const ADDRESS_OPTIONS = [
-  '742 Evergreen Terrace, Downtown',
-  '1204 Pinecrest Ave, Apt 4B',
-  '500 Tech Hub Blvd, Suite 210',
-  '310 Oceanview Boulevard',
+  '12/4 Race Course Road, Coimbatore',
+  '42 Richmond Town, Central Bengaluru',
+  'Plot 18, Jubilee Hills, Hyderabad',
+  '74 Hiranandani Gardens, Powai, Mumbai',
 ];
 
 export const Header: React.FC<HeaderProps> = ({
@@ -138,7 +138,7 @@ export const Header: React.FC<HeaderProps> = ({
             </span>
             {cartSubtotal > 0 && (
               <span className="hidden sm:inline border-l border-white/20 pl-2 text-stone-300 font-mono tabular-nums">
-                ${cartSubtotal.toFixed(2)}
+                ₹{cartSubtotal.toFixed(2)}
               </span>
             )}
           </button>

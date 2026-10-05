@@ -11,7 +11,7 @@ interface CartDrawerProps {
   onProceedToCheckout: (appliedPromo: string | null, promoDiscount: number, selectedTip: number) => void;
 }
 
-const FREE_DELIVERY_THRESHOLD = 35.0;
+const FREE_DELIVERY_THRESHOLD = 499.0;
 
 export const CartDrawer: React.FC<CartDrawerProps> = ({
   isOpen,
@@ -25,19 +25,18 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
   const [promoDiscount, setPromoDiscount] = useState<number>(0);
   const [promoError, setPromoError] = useState<string | null>(null);
-  const [tipPercentage, setTipPercentage] = useState<number>(15);
+  const [selectedTip, setSelectedTip] = useState<number>(50);
 
   if (!isOpen) return null;
 
   const subtotal = cart.reduce((acc, item) => acc + item.itemTotal, 0);
   const isFreeDelivery = subtotal >= FREE_DELIVERY_THRESHOLD;
-  const deliveryFee = isFreeDelivery ? 0 : 2.99;
+  const deliveryFee = isFreeDelivery ? 0 : 49.0;
   const remainingForFree = Math.max(0, FREE_DELIVERY_THRESHOLD - subtotal);
 
-  // Tip calculation
-  const calculatedTip = (subtotal * tipPercentage) / 100;
-  const tax = subtotal * 0.0825; // 8.25%
-  const total = Math.max(0, subtotal + deliveryFee + tax + calculatedTip - promoDiscount);
+  // 5% GST (Standard restaurant rate in India)
+  const tax = subtotal * 0.05;
+  const total = Math.max(0, subtotal + deliveryFee + tax + selectedTip - promoDiscount);
 
   const handleApplyPromo = () => {
     setPromoError(null);
@@ -54,7 +53,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
       setPromoCode('');
     } else if (code === 'FREEDELIVERY') {
       setPromoDiscount(deliveryFee);
-      setAppliedPromo('FREEDELIVERY (Free Shipping)');
+      setAppliedPromo('FREEDELIVERY (Free Delivery)');
       setPromoCode('');
     } else {
       setPromoError('Invalid promo code. Try "TASTE20" for 20% off.');
@@ -62,7 +61,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   };
 
   const handleCheckoutClick = () => {
-    onProceedToCheckout(appliedPromo, promoDiscount, calculatedTip);
+    onProceedToCheckout(appliedPromo, promoDiscount, selectedTip);
   };
 
   return (
@@ -99,10 +98,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             <span className="text-[#57534E]">
               {isFreeDelivery
                 ? '✨ Unlocked Free Thermal Delivery'
-                : `Add $${remainingForFree.toFixed(2)} more for Free Delivery`}
+                : `Add ₹${remainingForFree.toFixed(0)} more for Free Delivery`}
             </span>
             <span className="font-mono tabular-nums text-[#1C1917]">
-              ${subtotal.toFixed(2)} / ${FREE_DELIVERY_THRESHOLD.toFixed(2)}
+              ₹{subtotal.toFixed(0)} / ₹{FREE_DELIVERY_THRESHOLD.toFixed(0)}
             </span>
           </div>
           <div className="w-full h-1.5 bg-[#E7E3DC] rounded-full overflow-hidden">
@@ -159,7 +158,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                         {item.dish.name}
                       </h4>
                       <span className="font-mono text-xs font-bold text-[#1C1917] tabular-nums whitespace-nowrap">
-                        ${item.itemTotal.toFixed(2)}
+                        ₹{item.itemTotal.toFixed(2)}
                       </span>
                     </div>
 
@@ -266,26 +265,26 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               {promoError && <p className="text-[11px] text-rose-600">{promoError}</p>}
             </div>
 
-            {/* Courier Tip Selection */}
+            {/* Courier Tip Selection in Rupees */}
             <div className="space-y-1.5">
               <div className="flex items-center justify-between text-xs text-[#57534E]">
                 <span>Artisan Courier Tip</span>
                 <span className="font-mono tabular-nums font-semibold text-[#1C1917]">
-                  ${calculatedTip.toFixed(2)}
+                  ₹{selectedTip.toFixed(2)}
                 </span>
               </div>
               <div className="grid grid-cols-4 gap-1.5">
-                {[10, 15, 20, 0].map((pct) => (
+                {[30, 50, 100, 0].map((amt) => (
                   <button
-                    key={pct}
-                    onClick={() => setTipPercentage(pct)}
+                    key={amt}
+                    onClick={() => setSelectedTip(amt)}
                     className={`py-1 text-xs font-medium rounded-md transition-colors ${
-                      tipPercentage === pct
+                      selectedTip === amt
                         ? 'bg-[#1C1917] text-white shadow-xs'
                         : 'bg-white text-[#57534E] hover:text-[#1C1917] border border-[#E7E3DC]'
                     }`}
                   >
-                    {pct === 0 ? 'None' : `${pct}%`}
+                    {amt === 0 ? 'None' : `₹${amt}`}
                   </button>
                 ))}
               </div>
@@ -295,7 +294,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             <div className="space-y-1.5 pt-2 border-t border-[#E7E3DC] text-xs text-[#57534E]">
               <div className="flex justify-between">
                 <span>Items Subtotal</span>
-                <span className="font-mono tabular-nums text-[#1C1917]">${subtotal.toFixed(2)}</span>
+                <span className="font-mono tabular-nums text-[#1C1917]">₹{subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
                 <span>Thermal Delivery</span>
@@ -303,23 +302,29 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   {deliveryFee === 0 ? (
                     <span className="text-emerald-700 font-semibold">FREE</span>
                   ) : (
-                    `$${deliveryFee.toFixed(2)}`
+                    `₹${deliveryFee.toFixed(2)}`
                   )}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span>Local Estimated Tax</span>
-                <span className="font-mono tabular-nums text-[#1C1917]">${tax.toFixed(2)}</span>
+                <span>Restaurant GST (5%)</span>
+                <span className="font-mono tabular-nums text-[#1C1917]">₹{tax.toFixed(2)}</span>
               </div>
               {promoDiscount > 0 && (
                 <div className="flex justify-between text-emerald-700 font-medium">
                   <span>Promotion Savings</span>
-                  <span className="font-mono tabular-nums">-${promoDiscount.toFixed(2)}</span>
+                  <span className="font-mono tabular-nums">-₹{promoDiscount.toFixed(2)}</span>
+                </div>
+              )}
+              {selectedTip > 0 && (
+                <div className="flex justify-between">
+                  <span>Courier Gratuity</span>
+                  <span className="font-mono tabular-nums text-[#1C1917]">₹{selectedTip.toFixed(2)}</span>
                 </div>
               )}
               <div className="flex justify-between text-sm font-bold text-[#1C1917] pt-2 border-t border-[#E7E3DC]">
                 <span>Total Due</span>
-                <span className="font-mono tabular-nums">${total.toFixed(2)}</span>
+                <span className="font-mono tabular-nums">₹{total.toFixed(2)}</span>
               </div>
             </div>
 

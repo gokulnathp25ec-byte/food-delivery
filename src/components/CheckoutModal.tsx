@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, CreditCard, DollarSign, MapPin, Phone, User, CheckCircle, ShieldCheck } from 'lucide-react';
+import { X, CreditCard, Smartphone, Banknote, MapPin, Phone, User, ShieldCheck } from 'lucide-react';
 import { CartItem, Order } from '../types';
 
 interface CheckoutModalProps {
@@ -24,18 +24,18 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   onOrderSuccess,
 }) => {
   const [address, setAddress] = useState(defaultAddress);
-  const [apartment, setApartment] = useState('Apt 302');
-  const [instructions, setInstructions] = useState('Leave on the doorstep, ring bell once.');
-  const [customerName, setCustomerName] = useState('Eleanor Vance');
-  const [phone, setPhone] = useState('(415) 890-4421');
+  const [apartment, setApartment] = useState('Flat 302, Tower B');
+  const [instructions, setInstructions] = useState('Leave with security or ring doorbell once.');
+  const [customerName, setCustomerName] = useState('Gokulnath P');
+  const [phone, setPhone] = useState('+91 98421 78900');
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'apple_pay' | 'cash'>('apple_pay');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!isOpen) return null;
 
   const subtotal = cart.reduce((acc, item) => acc + item.itemTotal, 0);
-  const deliveryFee = subtotal >= 35 ? 0 : 2.99;
-  const tax = subtotal * 0.0825;
+  const deliveryFee = subtotal >= 499 ? 0 : 49.0;
+  const tax = subtotal * 0.05; // 5% GST
   const total = Math.max(0, subtotal + deliveryFee + tax + tipAmount - promoDiscount);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -63,11 +63,11 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
         customerPhone: phone,
         paymentMethod,
         courier: {
-          name: 'Marcus Vance',
+          name: 'Karthik Raja',
           rating: 4.98,
           deliveriesCount: 1420,
-          vehicle: 'Specialized Thermal E-Cargo Bike',
-          phone: '(415) 555-0199',
+          vehicle: 'Ather 450X Thermal Electric EV',
+          phone: '+91 98400 12345',
         },
       };
 
@@ -118,7 +118,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   required
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  placeholder="Street Address"
+                  placeholder="Street Address / Landmark"
                   className="w-full px-3.5 py-2.5 text-xs bg-white border border-[#E7E3DC] rounded-xl text-[#1C1917] focus:outline-none focus:ring-1 focus:ring-[#1C1917]"
                 />
               </div>
@@ -127,7 +127,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   type="text"
                   value={apartment}
                   onChange={(e) => setApartment(e.target.value)}
-                  placeholder="Apt / Suite / Floor"
+                  placeholder="Flat / Building / Floor"
                   className="w-full px-3.5 py-2.5 text-xs bg-white border border-[#E7E3DC] rounded-xl text-[#1C1917] focus:outline-none focus:ring-1 focus:ring-[#1C1917]"
                 />
               </div>
@@ -142,7 +142,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 type="text"
                 value={instructions}
                 onChange={(e) => setInstructions(e.target.value)}
-                placeholder="E.g. Gate code #1234, leave with doorman..."
+                placeholder="E.g. Call upon arrival, leave with security guard..."
                 className="w-full px-3.5 py-2 text-xs bg-white border border-[#E7E3DC] rounded-xl text-[#1C1917] focus:outline-none focus:ring-1 focus:ring-[#1C1917]"
               />
             </div>
@@ -173,7 +173,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   required
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  placeholder="(555) 000-0000"
+                  placeholder="+91 98765 43210"
                   className="w-full pl-9 pr-3.5 py-2.5 text-xs bg-white border border-[#E7E3DC] rounded-xl text-[#1C1917] focus:outline-none focus:ring-1 focus:ring-[#1C1917]"
                 />
               </div>
@@ -191,40 +191,43 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               <button
                 type="button"
                 onClick={() => setPaymentMethod('apple_pay')}
-                className={`py-3 px-2 rounded-xl border text-center transition-colors flex flex-col items-center justify-center gap-1 ${
+                className={`py-3 px-2 rounded-xl border text-center transition-colors flex flex-col items-center justify-center gap-1 cursor-pointer ${
                   paymentMethod === 'apple_pay'
                     ? 'border-[#1C1917] bg-[#FAF8F5] text-[#1C1917] font-semibold'
                     : 'border-[#E7E3DC] text-[#57534E] hover:border-[#D6D3D1]'
                 }`}
               >
-                <span className="text-xs">Apple / GPay</span>
-                <span className="text-[10px] text-[#78716C]">Instant 1-Click</span>
+                <Smartphone className="w-4 h-4 text-[#D9531E]" />
+                <span className="text-xs">UPI / GPay / PhonePe</span>
+                <span className="text-[10px] text-[#78716C]">Instant QR / App</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setPaymentMethod('card')}
-                className={`py-3 px-2 rounded-xl border text-center transition-colors flex flex-col items-center justify-center gap-1 ${
+                className={`py-3 px-2 rounded-xl border text-center transition-colors flex flex-col items-center justify-center gap-1 cursor-pointer ${
                   paymentMethod === 'card'
                     ? 'border-[#1C1917] bg-[#FAF8F5] text-[#1C1917] font-semibold'
                     : 'border-[#E7E3DC] text-[#57534E] hover:border-[#D6D3D1]'
                 }`}
               >
-                <span className="text-xs">Credit Card</span>
-                <span className="text-[10px] text-[#78716C]">Visa / MC / Amex</span>
+                <CreditCard className="w-4 h-4 text-[#1C1917]" />
+                <span className="text-xs">Cards / NetBanking</span>
+                <span className="text-[10px] text-[#78716C]">RuPay / Visa / MC</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setPaymentMethod('cash')}
-                className={`py-3 px-2 rounded-xl border text-center transition-colors flex flex-col items-center justify-center gap-1 ${
+                className={`py-3 px-2 rounded-xl border text-center transition-colors flex flex-col items-center justify-center gap-1 cursor-pointer ${
                   paymentMethod === 'cash'
                     ? 'border-[#1C1917] bg-[#FAF8F5] text-[#1C1917] font-semibold'
                     : 'border-[#E7E3DC] text-[#57534E] hover:border-[#D6D3D1]'
                 }`}
               >
+                <Banknote className="w-4 h-4 text-emerald-600" />
                 <span className="text-xs">Pay on Arrival</span>
-                <span className="text-[10px] text-[#78716C]">Cash or Card</span>
+                <span className="text-[10px] text-[#78716C]">Cash or UPI scan</span>
               </button>
             </div>
           </div>
@@ -233,21 +236,27 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
           <div className="bg-[#FAF8F5] p-3.5 rounded-xl border border-[#E7E3DC] space-y-1.5 text-xs text-[#57534E]">
             <div className="flex justify-between">
               <span>{cart.length} unique dish selections</span>
-              <span className="font-mono tabular-nums text-[#1C1917]">${subtotal.toFixed(2)}</span>
+              <span className="font-mono tabular-nums text-[#1C1917]">₹{subtotal.toFixed(2)}</span>
             </div>
             {promoTitle && (
               <div className="flex justify-between text-emerald-700">
                 <span>{promoTitle}</span>
-                <span className="font-mono tabular-nums">-${promoDiscount.toFixed(2)}</span>
+                <span className="font-mono tabular-nums">-₹{promoDiscount.toFixed(2)}</span>
               </div>
             )}
             <div className="flex justify-between">
               <span>Courier gratuity</span>
-              <span className="font-mono tabular-nums text-[#1C1917]">${tipAmount.toFixed(2)}</span>
+              <span className="font-mono tabular-nums text-[#1C1917]">₹{tipAmount.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Delivery Fee</span>
+              <span className="font-mono tabular-nums text-[#1C1917]">
+                {deliveryFee === 0 ? 'FREE' : `₹${deliveryFee.toFixed(2)}`}
+              </span>
             </div>
             <div className="flex justify-between text-sm font-bold text-[#1C1917] pt-2 border-t border-[#E7E3DC]">
               <span>Final Total</span>
-              <span className="font-mono tabular-nums">${total.toFixed(2)}</span>
+              <span className="font-mono tabular-nums">₹{total.toFixed(2)}</span>
             </div>
           </div>
 
@@ -263,7 +272,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 <span>Confirming Order with Kitchens...</span>
               </div>
             ) : (
-              <span>Place Order · ${total.toFixed(2)}</span>
+              <span>Place Order · ₹{total.toFixed(2)}</span>
             )}
           </button>
 

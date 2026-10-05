@@ -193,7 +193,7 @@ export const CustomizationModal: React.FC<CustomizationModalProps> = ({
 
                           {choice.priceDelta > 0 && (
                             <span className="font-mono text-xs font-semibold text-[#1C1917] tabular-nums">
-                              +${choice.priceDelta.toFixed(2)}
+                              +₹{choice.priceDelta.toFixed(2)}
                             </span>
                           )}
                         </button>
@@ -252,7 +252,7 @@ export const CustomizationModal: React.FC<CustomizationModalProps> = ({
           >
             <span>Add to Order</span>
             <span>·</span>
-            <span className="font-mono tabular-nums">${finalTotal.toFixed(2)}</span>
+            <span className="font-mono tabular-nums">₹{finalTotal.toFixed(2)}</span>
           </button>
         </div>
       </div>

@@ -78,7 +78,7 @@ export const OrderTrackerModal: React.FC<OrderTrackerModalProps> = ({
                 </span>
               </div>
               <p className="text-xs text-[#57534E]">
-                {order.items.length} items · Total ${order.total.toFixed(2)}
+                {order.items.length} items · Total ₹{order.total.toFixed(2)}
               </p>
             </div>
           </div>
@@ -306,7 +306,7 @@ export const OrderTrackerModal: React.FC<OrderTrackerModalProps> = ({
                   <div>
                     <span className="font-semibold text-[#1C1917]">{item.quantity}x</span> {item.dish.name}
                   </div>
-                  <span className="font-mono tabular-nums text-[#1C1917]">${item.itemTotal.toFixed(2)}</span>
+                  <span className="font-mono tabular-nums text-[#1C1917]">₹{item.itemTotal.toFixed(2)}</span>
                 </div>
               ))}
             </div>
@@ -314,27 +314,27 @@ export const OrderTrackerModal: React.FC<OrderTrackerModalProps> = ({
             <div className="pt-2 border-t border-[#F5F2EB] space-y-1 text-xs text-[#57534E]">
               <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span className="font-mono tabular-nums">${order.subtotal.toFixed(2)}</span>
+                <span className="font-mono tabular-nums">₹{order.subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
                 <span>Thermal Delivery</span>
                 <span className="font-mono tabular-nums">
-                  {order.deliveryFee === 0 ? 'FREE' : `$${order.deliveryFee.toFixed(2)}`}
+                  {order.deliveryFee === 0 ? 'FREE' : `₹${order.deliveryFee.toFixed(2)}`}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span>Courier Tip</span>
-                <span className="font-mono tabular-nums">${order.tip.toFixed(2)}</span>
+                <span className="font-mono tabular-nums">₹{order.tip.toFixed(2)}</span>
               </div>
               {order.discount > 0 && (
                 <div className="flex justify-between text-emerald-700">
                   <span>Promotion Savings</span>
-                  <span className="font-mono tabular-nums">-${order.discount.toFixed(2)}</span>
+                  <span className="font-mono tabular-nums">-₹{order.discount.toFixed(2)}</span>
                 </div>
               )}
               <div className="flex justify-between font-bold text-sm text-[#1C1917] pt-1">
                 <span>Total Paid</span>
-                <span className="font-mono tabular-nums">${order.total.toFixed(2)}</span>
+                <span className="font-mono tabular-nums">₹{order.total.toFixed(2)}</span>
               </div>
             </div>
           </div>
